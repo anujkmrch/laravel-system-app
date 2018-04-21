@@ -1,0 +1,138 @@
+<?php
+
+namespace System\Apps\Auth\Controllers;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Validation\ValidationException;
+
+use Illuminate\Http\Request;
+
+use SEO;
+class LoginController extends Controller
+{
+    /*
+    |--------------------------------------------------------------------------
+    | Login Controller
+    |--------------------------------------------------------------------------
+    |
+    | This controller handles authenticating users for the application and
+    | redirecting them to your home screen. The controller uses a trait
+    | to conveniently provide its functionality to your applications.
+    |
+    */
+
+    use AuthenticatesUsers;
+
+    /**
+     * Where to redirect users after login.
+     *
+     * @var string
+     */
+    protected $redirectTo = '/';
+
+    protected $redirectAfterLogout = '/';
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+   var $key = 'email';
+    public function __construct()
+    {
+
+        $this->middleware('guest', ['except' => 'logout']);
+        $this->redirectTo = request()->has('redirect_to') ? '/'.request()->input('redirect_to') : config('system.auth.redirect','/');
+            
+    }
+
+    public function showLoginForm()
+    {
+        SEO::setTitle(\Lang::get("SystemLang::authentication.seo.title.login"));
+        SEO::setDescription(\Lang::get("SystemLang::authentication.seo.description.login"));
+        return view('SystemView::auth.login');
+    }
+
+    public function logout(Request $request)
+    {
+        $request->session()->flash('alert-danger', 'You\'re already logged <output> </output>');
+        if (!\Auth::guest() and !\System::isGuestCreated()):
+            $user = \System::user();
+            event('auth.onLogout',$user);
+            $this->guard()->logout();
+            $request->session()->flush();
+            $request->session()->regenerate();
+        endif;
+        return redirect($this->redirectAfterLogout);
+    }
+
+    public function login(Request $request) {
+       
+        $this->validateLogin($request);
+        $this->key =    $field = filter_var($request->input('email'), FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        $request->merge([$field => $request->input('email')]);
+
+        // If the class is using the ThrottlesLogins trait, we can automatically throttle
+        // the login attempts for this application. We'll key this by the username and
+        // the IP address of the client making these requests into this application.
+        if ($this->hasTooManyLoginAttempts($request)) {
+            $this->fireLockoutEvent($request);
+
+            return $this->sendLockoutResponse($request);
+        }
+
+        if ($this->attemptLogin($request)) {
+            return $this->sendLoginResponse($request);
+        }
+
+        // If the login attempt was unsuccessful we will increment the number of attempts
+        // to login and redirect the user back to the login form. Of course, when this
+        // user surpasses their maximum number of attempts they will get locked out.
+        $this->incrementLoginAttempts($request);
+
+        return $this->sendFailedLoginResponse($request);
+    }
+
+    /**
+     * Get the login username to be used by the controller.
+     *
+     * @return string
+     */
+    public function username()
+    {
+        return $this->key;
+    }
+
+
+    /**
+     * The user has been authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+    protected function authenticated(Request $request, $user)
+    {
+        event('auth.onLogin',$user);
+    }
+
+    /**
+     * Get the failed login response instance.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws ValidationException
+     */
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        event('auth.onLoginFalure',$request);
+        throw ValidationException::withMessages([
+            $this->username() => [trans('auth.failed')],
+        ]);
+    }
+
+
+
+}

@@ -1,0 +1,106 @@
+@extends("SystemView::client.client")
+@section('content')
+<div class="content">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 col-lg-offset-2">
+				@if($application)
+					<table class="table table-hover table-bordered">
+						<thead>
+							<tr>
+								<th>Type</th>
+								<th>Value</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Registration</td>
+								<td>{{$application->id}}</td>
+							</tr>
+							<tr>
+								<td>Course</td>
+								<td>{{$application->course->title}}</td>
+							</tr>
+							<tr>
+								<td>Session</td>
+								<td>{{$application->course->session->title}}</td>
+							</tr>
+							<tr>
+								<td>Name</td>
+								<td>{{$application->user->name}}</td>
+							</tr>
+							<tr>
+								<td>Gender</td>
+								<td>{{$application->user->name}}</td>
+							</tr>
+
+							<tr>
+								<td>Phone number</td>
+								<td>{{$application->user->name}}</td>
+							</tr>
+
+							<tr>
+								<td>Religion</td>
+								<td>{{$application->user->name}}</td>
+							</tr>
+
+
+							<tr>
+								<td>Category</td>
+								<td>{{$application->user->name}}</td>
+							</tr>
+
+							<tr>
+								<td>ID Type</td>
+								<td>{{$application->user->name}}</td>
+							</tr>
+
+							<tr>
+								<td>ID Number</td>
+								<td>{{$application->user->name}}</td>
+							</tr>
+
+							<tr>
+								<td>Father's name</td>
+								<td>{{$application->user->name}}</td>
+							</tr>
+
+							<tr>
+								<td>Father Profession</td>
+								<td>{{$application->user->name}}</td>
+							</tr>
+
+							<tr>
+								<td>Father Phone number</td>
+								<td>{{$application->user->name}}</td>
+							</tr>
+
+							<tr>
+								<td>Father's Qualification</td>
+								<td>{{$application->user->name}}</td>
+							</tr>
+
+							<tr>
+								<td>Father's Office address</td>
+								<td>{{$application->user->name}}</td>
+							</tr>
+
+							<tr>
+								<td>Father's Office Phone number</td>
+								<td>{{$application->user->name}}</td>
+							</tr>
+
+							<tr>
+								<td>Father's Mobile number</td>
+								<td>{{$application->user->name}}</td>
+							</tr>
+
+						</tbody>
+					</table>
+					
+				@endif
+			</div>
+		</div>
+	</div>
+</div>
+@stop
