@@ -56,26 +56,20 @@ class SystemAdminBuilderMiddleware
         $menu=["title"=>"Client","slug"=>"dashboard","href"=>'/',
             "ordering"=>-2,];
         Admin::add_admin_menu('/client',['__base__'=>$menu]);
-        $menu=["title"=>"Admin","slug"=>"dashboard","href"=>'/admin',
-            "ordering"=>-1,];
-        Admin::add_admin_menu('/admin',['__base__'=>$menu]);
         
         // Sidebar user menu
-        $menu=["title"=> "Users","slug"=>"users",'href'=>"/admin/users",
+        $menu=["title"=> "Users","slug"=>"users",'href'=>route('admin.user.index'),
             "ordering"=> 0,];
         Admin::add_admin_menu('users',['__base__'=>$menu]);
 
-        $menu=["title"=> "All users","slug"=>"users",'href'=>"/admin/users/all","ordering"=> 0,];
-        Admin::add_admin_menu('users/all',['__base__'=>$menu]);
-
-        $menu=["title"=> "Create new","slug"=>"users",'href'=>"/admin/user/new","ordering"=> 0,];
+        $menu=["title"=> "Create new user","slug"=>"users",'href'=>route('admin.user.create'),"ordering"=> 0,];
         Admin::add_admin_menu('users/new',['__base__'=>$menu]);
 
         // Sidebar Access control
         $menu=["title"=> "Access Control","slug"=>"users",'href'=>"/admin/access","ordering"=> 1,];
-        Admin::add_admin_menu('access',['__base__'=>$menu]);
+        Admin::add_admin_menu('users/role-permission-settings',['__base__'=>$menu]);
 
-        // Sidebar Menus entries
+        //Sidebar Menus entries
         $menu=["title"=> "Menus","slug"=>"menus",'href'=>"/admin/menus",
             "ordering"=> 1,];
         Admin::add_admin_menu('menus',['__base__'=>$menu]);
