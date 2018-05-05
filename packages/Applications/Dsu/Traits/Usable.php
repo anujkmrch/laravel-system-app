@@ -30,7 +30,7 @@ trait Usable
 	{	
 		$query = "SELECT ca.* FROM course_applications AS ca JOIN courses AS c on ca.course_id = c.id WHERE c.course_session_id={$this->course->session->id} AND ca.user_id={$this->getKey()}";
 
-		$query = "SELECT ca.* FROM course_applications AS ca JOIN courses as c ON ca.course_id=c.id WHERE c.course_session_id={$this->course->session->id}";
+		// $query = "SELECT ca.* FROM course_applications AS ca JOIN courses as c ON ca.course_id=c.id WHERE c.course_session_id={$this->course->session->id}";
 
 		return count(\DB::select($query));	
 	}

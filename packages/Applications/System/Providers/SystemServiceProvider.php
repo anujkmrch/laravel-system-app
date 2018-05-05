@@ -53,6 +53,10 @@ class SystemServiceProvider extends ServiceProvider
             $router->middleware('jwt.refresh', 'Tymon\JWTAuth\Middleware\RefreshToken');
         }
 
+        $this->mergeConfigFrom(
+            dirname(__DIR__).DS.'Config'.DS."system.php", 'system'
+        );
+
         // this middleware is responsible for initializing the system
         $router->pushMiddlewareToGroup("web",SystemGuestUserMiddleware::class);
 

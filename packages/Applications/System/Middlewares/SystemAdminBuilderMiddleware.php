@@ -39,10 +39,10 @@ class SystemAdminBuilderMiddleware
         //user menu
         //
         $menu=["title"=> Auth::user()->name,"slug"=>"username","ordering"=> 0,
-            "href"=>'/admin/my-profile',];
+            "href"=>route('admin.user.single',['id'=>Auth::user()->username]),];
         Admin::add_admin_menu('user',['__base__'=>$menu],'usermenu');
 
-        $menu=["title"=>"My Profile","slug"=>"my-profile","href"=>'/admin/my-profile',"ordering"=> 0,'permission'=>'manage_options',];
+        $menu=["title"=>"Your Profile","slug"=>"my-profile","href"=>route('admin.user.single',['id'=>Auth::user()->username]),"ordering"=> 0,'permission'=>'manage_options',];
         Admin::add_admin_menu('user/profile',['__base__'=>$menu],'usermenu');
         
         $menu=["title"=>"Logout","slug"=>"logout","ordering"=> 20,           "href"=>'/logout',];
@@ -53,7 +53,7 @@ class SystemAdminBuilderMiddleware
         //sideabar menu
         //
         //
-        $menu=["title"=>"Client","slug"=>"dashboard","href"=>'/',
+        $menu=["title"=>"Site","slug"=>"dashboard","href"=>'/',
             "ordering"=>-2,];
         Admin::add_admin_menu('/client',['__base__'=>$menu]);
         

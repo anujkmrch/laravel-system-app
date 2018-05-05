@@ -183,6 +183,9 @@ return [
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
         /* System */
         System\Providers\SystemServiceProvider::class,
+        Order\Providers\OrderServiceProvider::class,
+
+        Dsu\Providers\DsuServiceProvider::class,
 
     ],
 
@@ -244,6 +247,8 @@ return [
         'System' => System\Facades\SystemFacade::class,
         'Admin'  => System\Facades\AdminFacade::class,
         'Client' => System\Facades\ClientFacade::class,
+
+        'Ordering' => Order\Facades\OrderingFacade::class,
 
     ],
 

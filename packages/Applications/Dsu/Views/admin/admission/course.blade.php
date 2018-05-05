@@ -3,7 +3,6 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12">
-			<h1>I am the admission</h1>
 			<h1>Course {{$course->title}}</h1>
 			@foreach($course->applications as $application)
 				<h4>Total applications {{$course->applications->count()}}</h4>

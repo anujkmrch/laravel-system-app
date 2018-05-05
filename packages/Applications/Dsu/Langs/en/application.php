@@ -48,5 +48,15 @@
 
 		'buddhism' => "Buddhism",
 
+		'examination_center' => "Examination Center",
+		"general" => "General",
+		"catholic" => "Catholic",
+		"illiterate" => "Illiterate",
+		"airforce" => "Airforce",
+		"aadhar"	=> "Aadhar",
+		"navy"		=> "Navy",
+		"primary"	=> "Primary",
+		"passport"  => "Passport",
+
 	];
 ?>

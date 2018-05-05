@@ -43,7 +43,7 @@ class CourseController extends Controller
 
 				$user = User::find(\Auth::id());
 				$builder = new \System\Classes\Builder(config('dsu.application'));
-				
+
 				// if(config('dsu.max_applied',2) > 0 and 
 				// 	$user->course($course)->AppliedinSessions() >= config('dsu.max_applied',2)) {
 				// 		return "You have reached limit";
@@ -183,8 +183,13 @@ class CourseController extends Controller
 	public function fetch(Request $request)
 	{
 		$keys = array_keys(config('dsu.application',[]));
+		$order_type = "Default";
 		if($request->has('course_id'))
 			$course_id = $request->input('course_id');
+
+		if($request->has('order_type'))
+			$order_type = $request->input('order_type');
+
 		if(count($keys)):
 			// array_unshift($keys, 'course_id');
 			$rules = [
@@ -220,6 +225,7 @@ class CourseController extends Controller
 
 			$validator = \Validator::make($request->all(),$rules);
 			if($validator->fails()){
+				// dd($validator->errors());
 				return redirect()->back()->withInput($request->input())->withErrors($validator);
 				// dd($validation->errors());
 			}
@@ -258,13 +264,14 @@ class CourseController extends Controller
 	        $default_method=OrderConfig::getConfig('default_payment_method');
             
             $order = new Order();
-            
+            $order->type = $order_type;
             $order->cart = $cart;
             $order->user_id = $user->id;
             $order->address= $user->name;
             $order->name = $user->name;
             $order->key = uniqid();
             $order->payment_method = $default_method;
+
             $order->save();
             $application->order_id = $order->id;
             $application->save();

@@ -1,3 +1,3 @@
-@extends("DsuView::client.client")
+@extends("SystemView::client.client")
 @section('content')
 @stop

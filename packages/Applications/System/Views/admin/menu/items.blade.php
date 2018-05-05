@@ -37,25 +37,13 @@
 {{-- anuj's edit
 						<a href="{{route('admin.menu.item.trash',['type'=>$menu->type->slug, 'id' => $menu->id])}}"><i class=" fa fa-trash"></i> Trash</a> --}}
 					</td>
-				</tr>
+			</tr>
 				@endforeach
 			</tbody>
 		</table>
-			{{-- @foreach($menus->menus as $menu)
-			<div class="accordion to-animate">
-				<div class="accordion-head">
-					<div class="links pull-right">
-						<a href="{{route('admin.menu.item',['type'=>$menu->type->slug, 'id' => $menu->id])}}" class="accordion-toggle js-accordion-toggle"><i class=" fa fa-gear"></i> Manage</a>	
-						
-						<a href="{{route('admin.menu.trash',['type'=>$menu->type->slug, 'id' => $menu->id])}}"" class="accordion-toggle js-accordion-toggle"><i class=" fa fa-trash"></i> Trash</a>
-					</div>
-					<h3>{{$menu->title}}</h3>
-					<span class="event-meta">Key {!!"&rarr;"!!} {{$menu->slug}} | Site view {!!"&rarr;"!!} {{ ucfirst($menus->for) }}</span>
-				</div>
-			</div>
-			<!-- END .accordion -->
-			@endforeach --}}
 		</div>
 	</div>
 </div>
+@endsection
+@section('scripts')
 @endsection

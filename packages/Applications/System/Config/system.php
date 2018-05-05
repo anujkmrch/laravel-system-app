@@ -1,39 +1,26 @@
 <?php
 
-// return [
-// 	'guest_role_slug' => 'guest',
-// 	'default_user_role' => 'subscriber',
-// 	'widgetize_extracter' => [
-// 				'title'=>'extract_widget_title',
-// 				'show'=>'extract_widget_menu',
-// 				'position' => 'extract_widget_position',
-// 			],
-// 	'positions' => ['user','left','right','top','footer'],
-// ];
-// 
-
 return [
+
+	'auth'=>['redirect' => '/profile'],
 	//default guest slug role
 	'guest_role_slug' => 'guest',
 
 	//user given role on registration from client side
 	'default_user_role' => 'subscriber',
 
+	// user given role on registration from client side
+	'multirole' => false,
 
+	//terms and condition page url
+	//make sure you provide full url
 	'terms_and_condition_url' => 'http://mytnc-url/tnc',
+
+	//force user to checkout in case of single item cart
+	'force_single_item_purchase' => true, //true/false
 	
 	// callback to build and arrange column for widget columns
 	
-	/**** Template for user widgetized column ****/
-	/**
-	  'title' => [
-			'title' => 'Title',
-		   	'type' => 'text',
-		   	'scope' => 'column', //{column, relation, configuration}//
-		   	'callback' => 'extract_widget_title',
-		   	'validations' => array('not_empty'),
-		],
-	**/
 	/**
 	 * What is a scope?
 	 * Scope is a data management criteria to define the where to store the 
@@ -55,10 +42,6 @@ return [
 	 * 
 	 */
 	'widgetize_extracter' => [
-				// 'title'=>'extract_widget_title',
-				// 'show'=>'extract_widget_menu',
-				// 'position' => 'extract_widget_position',
-
 				'title'      => [
 					'title' => 'Title',
 			    	'type' => 'text',
@@ -66,15 +49,16 @@ return [
 			    	'callback' => 'extract_widget_title',
 			    	'validations' => array('not_empty'),
 			    ],
-			    'menu' => [
-				    'title' => 'Select menu',
-				    'type' => 'select',
+			    
+			    'ordering' => [
+				    'title' => 'Ordering',
+				    'type' => 'text',
 				    'validations' => array('not_empty'),
-				    'callback' => 'menu_list_build',
-				    'scope' => 'configuration',
+				    'scope' => 'column',
 				    'multiple' => false,
 				    'required'  => true,
 				],
+
 				'position' => [
 				    'title' => 'Position',
 				    'type' => 'select',
@@ -84,6 +68,7 @@ return [
 				    'multiple' => false,
 				    'required'  => true,
 				],
+
 				'menus' => [
 				    'title' => 'Choose to show on menu',
 				    'type' => 'select',
@@ -91,8 +76,30 @@ return [
 				    'callback' => 'menu_item_build',
 				    'scope' => 'relation',
 				    'builder' => 'default',//'default' (user internal default widget based relationship manager),'external' (user builder_method by callback,
-				    'builder_method' => '', //,['sync','attach',detach]
+				    'builder_method' => 'sync', //,['sync','attach',detach]
+				    'extractor' => 'widget_menus_extractor',
+				    'extractor_key'  => 'id',
 				    'multiple' => true,
+				    'required'  => true,
+				],
+
+				'show_title' => [
+				    'title' => 'Show title',
+				    'type' => 'select',
+				    'callback' => 'widget_true_false_options',
+				    'scope' => 'configuration',
+				    'multiple' => false,
+				    'required'  => true,
+				],
+
+				'enabled' => [
+				    'title' => 'Enabled',
+				    'type' => 'select',
+				    'validations' => array('not_empty'),
+				    'callback' => 'widget_true_false_options',
+				    'scope' => 'column',
+				    'multiple' => false,
+				    'required'  => true,
 				],
 			],
 	
@@ -104,6 +111,12 @@ return [
 		'user'=>'User',
 		'left'=>'Left',
 		'right'=>'Right',
+		'banner' => 'Banner',
+		'featuring' =>'Featuring',
+		'containment' =>'Containment',
+		'footer_one' =>'Footer one',
+		'footer_two' =>'Footer three',
+		'footer_three' =>'Footer three',
 	],
 ];
 ?>

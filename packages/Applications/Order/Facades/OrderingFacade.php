@@ -1,9 +1,10 @@
 <?php
-namespace System\Facades;
+namespace Order\Facades;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Facade;
-use System\Facades\Facade\Admin;
-class AdminFacade extends Facade{
+use Order\Facades\Facade\Ordering;
+
+class OrderingFacade extends Facade{
 
 	/**
      * Get the registered name of the component.
@@ -12,7 +13,7 @@ class AdminFacade extends Facade{
      */
 
     protected static function getFacadeAccessor() { 
-    	return 'Admin'; 
+    	return 'Ordering'; 
 	}
 }
 ?>

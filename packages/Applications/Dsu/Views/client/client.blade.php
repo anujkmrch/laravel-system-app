@@ -12,7 +12,7 @@
         <script src="/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <nav class="navbar navbar-custom" role="navigation">
+        <nav class="navbar navbar-custom navbar-inverse" role="navigation">
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
@@ -33,7 +33,9 @@
                 @endif
             </div>
         </nav>
-        
+       @if ($errors->any())
+        {{ implode('', $errors->all('<div>:message</div>')) }}
+@endif
         @if(position_has_widget('banner'))
          <div class="jumbotron" id="banner">
             <div class="container">

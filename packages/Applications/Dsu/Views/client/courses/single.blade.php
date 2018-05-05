@@ -42,6 +42,7 @@
 				{{csrf_field()}}
 				<div class="col-lg-10 col-lg-offset-1">
 					<input type="hidden" name="course_id" value="{{$course->id}}">
+					<input type="hidden" name="order_type" value="course">
 					{!! $builder->build() !!}
 						<button type="submit" class="btn btn-primary">Apply</button>
 				</div>

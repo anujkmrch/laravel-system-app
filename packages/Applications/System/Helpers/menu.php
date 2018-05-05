@@ -71,7 +71,6 @@ function menu_ul($nodes,$recursive = false,$markup='li',$markup_class='',$cmarku
 }
 
 
-
 function menu_select($nodes, $prefix = '-',$key='id',$disable=false,$disableId=0,$parent_id = 0) {
 	$result = "";
     foreach ($nodes as $node) {
@@ -106,6 +105,40 @@ function tr($categories, $prefix = '-') {
     //return $result;
 }
 
+function admin_menu_ul($nodes,$markup='li',$markup_class='',$cmarkup='ul',$cmarkup_class= "in-link")
+{
+    $result = "";
+    foreach ($nodes as $node) {
+        $result .= PHP_EOL."<{$markup} class=\"n$markup_class";
+
+        if($node->children()->count()){
+            if(strlen($cmarkup))
+                $result .= " $cmarkup_class\"";
+        } else {
+           $result .= "\"";
+        }
+
+        $slug = ( empty($node->slug) or is_null($node->slug)) ? '/' : $node->slug;
+        $result .= "><a href=\"{$slug}\"";
+
+        if($node->children()->count()){
+            $result .= ' class="dropdown-toggle" data-toggle="dropdown">'.$node->title.'</a>';
+            if(strlen($cmarkup))
+                $result .= PHP_EOL. "<{$cmarkup} class=\"dropdown-ul\">";
+
+            $result .= admin_menu_ul($node->children,$markup,'',$cmarkup,$cmarkup_class);
+            
+            if(strlen($cmarkup))
+                $result .="</{$cmarkup}>";
+            $result .= "</{$markup}>";
+        } else{
+            $result .=">{$node->title}</a>";
+            $result .= "</{$markup}>";
+        }
+    }
+
+    return $result;
+}
 
 function admin_menu_table($categories, $prefix = '-',$menu,$slug) {
 	

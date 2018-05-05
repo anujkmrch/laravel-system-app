@@ -30,6 +30,8 @@ class Dsuify
             $dashboard=["title"=>"Your documents","slug"=>"visits","callback"=>'dsu_profile_documents','ordering'=>0,];
             Client::add_dashboard($dashboard);
 
+            \Ordering::addType('course',"Course");
+
             if(System::can('can_access_admin')):
                 $this->build_admin_menu();
                 $this->build_admin_quick_action_buttons();

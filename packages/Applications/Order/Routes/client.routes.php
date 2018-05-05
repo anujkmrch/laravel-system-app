@@ -11,5 +11,6 @@ Route::group(['namespace'=>"\Order\Apps\Client\Controllers"],function(){
 		'uses' => "OrderController@index",
 		'as' => 'order.client.order.index'
 	]);
+	
 });
 ?>

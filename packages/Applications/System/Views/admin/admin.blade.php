@@ -98,13 +98,6 @@
                 });
                 });
         </script>
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script>
-        <script>
-            $(function() {
-                $( 'input[type="date"]' ).datepicker({ dateFormat: 'dd-M-yy'});
-            });
-        </script>
-
-
+        @yield('scripts')
     </body>
 </html>

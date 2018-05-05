@@ -34,6 +34,11 @@ class DsuServiceProvider extends ServiceProvider
             dirname(__DIR__).DS.'Config' => config_path()
         ], 'DsuConfig');
 
+        $this->mergeConfigFrom(
+            dirname(__DIR__).DS.'Config'.DS."dsu.php", 'dsu'
+        );
+
+
         $router->pushMiddlewareToGroup("web", Dsuify::class);
 
         //register application routes

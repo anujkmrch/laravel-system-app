@@ -17,7 +17,6 @@
 						</thead>
 						<tbody>
 
-						
 					@foreach($user->applications as $application)
 					<tr>
 						<td>{{$application->id}}</td>

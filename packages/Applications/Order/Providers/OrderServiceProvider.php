@@ -10,7 +10,7 @@ use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Routing\Router;
 
 use Order\Middlewares\Orderify;
-use Order\Facades\Facade\Order;
+use Order\Facades\Facade\Ordering;
 
 class OrderServiceProvider extends ServiceProvider
 {
@@ -51,9 +51,9 @@ class OrderServiceProvider extends ServiceProvider
         $this->loadHelpers();
         $this->loadWidgetCallback();
 
-    	\App::bind('Order', function()
+    	\App::bind('Ordering', function()
         {
-            return new Order;
+            return new Ordering;
         });       
     }
 
